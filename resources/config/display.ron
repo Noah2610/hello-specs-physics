@@ -1,0 +1,11 @@
+(
+  title:          "Hello nphysics + specs!",
+  dimensions:     Some((1280, 720)),
+  max_dimensions: Some((1280, 720)),
+  min_dimensions: Some((1280, 720)),
+  maximized:      false,
+  fullscreen:     false,
+  multisampling:  0,
+  visibility:     true,
+  vsync:          true,
+)

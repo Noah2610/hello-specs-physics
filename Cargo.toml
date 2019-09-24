@@ -1,0 +1,11 @@
+[package]
+name = "hello-specs-physics"
+version = "0.0.0"
+authors = ["Noah Rosenzweig <rosenzweig.noah@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+amethyst      = "0.12.0"
+deathframe    = { version = "0.2.0", path = "../deathframe" }
+serde         = { version = "1.0.101", features = ["derive"] }
+specs-physics = "0.3.0"
