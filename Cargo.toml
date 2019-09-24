@@ -6,6 +6,6 @@ edition = "2018"
 
 [dependencies]
 amethyst      = "0.12.0"
-deathframe    = { version = "0.2.0", path = "../deathframe" }
+deathframe    = { version = "0.2.1" }
 serde         = { version = "1.0.101", features = ["derive"] }
 specs-physics = "0.3.0"
