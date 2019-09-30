@@ -3,9 +3,8 @@ pub mod prelude {
 }
 
 pub mod state_prelude {
-    pub use amethyst::State;
-    pub use amethyst::StateData;
-    pub use amethyst::StateEvent;
+    pub use amethyst::{State, StateData, StateEvent, Trans};
+
     pub use deathframe::custom_game_data::CustomGameData;
 }
 
