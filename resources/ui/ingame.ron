@@ -1,0 +1,133 @@
+#![enable(implicit_some)]
+// UiWidget::Container
+Container(
+    // UiTransformBuilder
+    transform: (
+        id:             "ingame_menu",
+        x:              0.0,
+        y:              0.0,
+        width:          1.0,
+        height:         1.0,
+        anchor:         Middle,
+        mouse_reactive: false,
+        percent:        true,
+    ),
+    // TODO: UiImageBuilder
+    // background: (
+    //     image: File("resources/textures/ui/bg_paused_menu.png", Png, (channel: Srgb)),
+    // ),
+    children: [
+        // UiWidget::Button
+        Button(
+            // UiTransformBuilder
+            transform: (
+                id:             "btn_primary",
+                x:              0.0,
+                y:              96.0,
+                width:          224.0,
+                height:         112.0,
+                anchor:         Middle,
+                mouse_reactive: true,
+            ),
+            // UiButtonBuilder
+            button: (
+                text:              "PRIMARY",
+                font:              File("resources/fonts/undefined-medium.ttf", Ttf, ()),
+                font_size:         40.0,
+                normal_text_color: (0.0, 0.0, 0.0, 1.0),
+                hover_text_color:  (0.4, 0.4, 0.4, 1.0),
+                press_text_color:  (0.4, 0.4, 0.4, 1.0),
+                normal_image:      File(
+                    "resources/textures/btn_primary.png",
+                    Png,
+                    (
+                        channel: Srgb,
+                        sampler: (
+                            filter: Scale,
+                            wrap_mode: (Clamp, Clamp, Clamp),
+                        )
+                    ),
+                ),
+                hover_image:       File(
+                    "resources/textures/btn_primary.png",
+                    Png,
+                    (
+                        channel: Srgb,
+                        sampler: (
+                            filter: Scale,
+                            wrap_mode: (Clamp, Clamp, Clamp),
+                        )
+                    ),
+                ),
+                press_image:       File(
+                    "resources/textures/btn_primary.png",
+                    Png,
+                    (
+                        channel: Srgb,
+                        sampler: (
+                            filter: Scale,
+                            wrap_mode: (Clamp, Clamp, Clamp),
+                        )
+                    ),
+                ),
+            ),
+        ),
+        // UiWidget::Button
+        Button(
+            // UiTransformBuilder
+            transform: (
+                id:             "btn_secondary",
+                x:              0.0,
+                y:              -96.0,
+                width:          224.0,
+                height:         112.0,
+                anchor:         Middle,
+                mouse_reactive: true,
+            ),
+            // UiButtonBuilder
+            button: (
+                text:              "SECONDARY",
+                font:              File("resources/fonts/undefined-medium.ttf", Ttf, ()),
+                font_size:         40.0,
+                normal_text_color: (0.0, 0.0, 0.0, 1.0),
+                hover_text_color:  (0.4, 0.4, 0.4, 1.0),
+                press_text_color:  (0.4, 0.4, 0.4, 1.0),
+                // hover_text_color:  (0.4980392156862745, 0.0, 0.00784313725490196, 1.0),
+                // press_text_color:  (0.4980392156862745, 0.0, 0.00784313725490196, 1.0),
+                normal_image:      File(
+                    "resources/textures/btn_primary.png",
+                    Png,
+                    (
+                        channel: Srgb,
+                        sampler: (
+                            filter: Scale,
+                            wrap_mode: (Clamp, Clamp, Clamp),
+                        )
+                    ),
+                ),
+                hover_image:       File(
+                    "resources/textures/btn_primary.png",
+                    Png,
+                    (
+                        channel: Srgb,
+                        sampler: (
+                            filter: Scale,
+                            wrap_mode: (Clamp, Clamp, Clamp),
+                        )
+                    ),
+                ),
+                press_image:       File(
+                    "resources/textures/btn_primary.png",
+                    Png,
+                    (
+                        channel: Srgb,
+                        sampler: (
+                            filter: Scale,
+                            wrap_mode: (Clamp, Clamp, Clamp),
+                        )
+                    ),
+                ),
+            ),
+        )
+    ],
+)
