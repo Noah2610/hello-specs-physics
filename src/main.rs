@@ -9,9 +9,9 @@ mod states;
 
 use amethyst::core::transform::TransformBundle;
 use amethyst::renderer::types::DefaultBackend;
-use amethyst::renderer::RenderingBundle;
-use amethyst::ApplicationBuilder;
-use amethyst::{LogLevelFilter, LoggerConfig};
+use amethyst::renderer::{RenderFlat2D, RenderToWindow, RenderingBundle};
+use amethyst::utils::application_root_dir;
+use amethyst::{ApplicationBuilder, LogLevelFilter, LoggerConfig};
 use deathframe::custom_game_data::{CustomGameData, CustomGameDataBuilder};
 
 fn main() -> Result<(), String> {
@@ -40,8 +40,17 @@ fn start_logger() {
 
 fn build_game_data<'a, 'b>(
 ) -> amethyst::Result<CustomGameDataBuilder<'a, 'b, ()>> {
+    let display_config_file = application_root_dir()
+        .expect("Couldn't get game's root directory")
+        .join("resources/config/display.ron");
+
     // Bundles
-    let rendering_bundle = RenderingBundle::<DefaultBackend>::new();
+    let rendering_bundle = RenderingBundle::<DefaultBackend>::new()
+        .with_plugin(
+            RenderToWindow::from_config_path(display_config_file)
+                .with_clear([0.0, 0.0, 0.0, 1.0]),
+        )
+        .with_plugin(RenderFlat2D::default());
     let transform_bundle = TransformBundle::new();
     let input_bundle = input::input_bundle();
 
