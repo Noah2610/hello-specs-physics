@@ -12,7 +12,7 @@ impl<'a, 'b> State<CustomGameData<'a, 'b, ()>, StateEvent> for Ingame {
         &mut self,
         data: StateData<CustomGameData>,
     ) -> Trans<CustomGameData<'a, 'b>, StateEvent> {
-        data.data.update(&data.world, "ingame").unwrap();
+        data.data.update(data.world, "ingame").unwrap();
 
         Trans::None
     }

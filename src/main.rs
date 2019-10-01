@@ -12,7 +12,7 @@ use amethyst::renderer::types::DefaultBackend;
 use amethyst::renderer::{RenderFlat2D, RenderToWindow, RenderingBundle};
 use amethyst::utils::application_root_dir;
 use amethyst::{ApplicationBuilder, LogLevelFilter, LoggerConfig};
-use deathframe::custom_game_data::{CustomGameData, CustomGameDataBuilder};
+use deathframe::custom_game_data::prelude::*;
 
 fn main() -> Result<(), String> {
     init_game().map_err(|e| e.to_string())
@@ -54,11 +54,15 @@ fn build_game_data<'a, 'b>(
     let transform_bundle = TransformBundle::new();
     let input_bundle = input::input_bundle();
 
-    let custom_game_data = CustomGameDataBuilder::new()
-        .dispatcher("ingame")?
-        .with_core_bundle(rendering_bundle)?
-        .with_core_bundle(transform_bundle)?
-        .with_core_bundle(input_bundle)?;
+    let custom_game_data = CustomGameDataBuilder::<'a, 'b, ()>::default()
+        .dispatcher("ingame")
+        .unwrap()
+        .with_core_bundle(rendering_bundle)
+        .unwrap()
+        .with_core_bundle(transform_bundle)
+        .unwrap()
+        .with_core_bundle(input_bundle)
+        .unwrap();
 
     Ok(custom_game_data)
 }
