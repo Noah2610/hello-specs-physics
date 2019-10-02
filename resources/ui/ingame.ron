@@ -14,7 +14,7 @@ Container(
     ),
     // TODO: UiImageBuilder
     // background: (
-    //     image: File("resources/textures/ui/bg_paused_menu.png", Png, (channel: Srgb)),
+    //     image: File("resources/textures/bg_menu.png", Png, (channel: Srgb)),
     // ),
     children: [
         // UiWidget::Button
