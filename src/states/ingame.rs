@@ -61,6 +61,7 @@ impl<'a, 'b> Menu<CustomGameData<'a, 'b, ()>, StateEvent> for Ingame {
     }
 
     fn ui_ron_path(&self) -> String {
+        // TODO stupid
         application_dir(UI_RON_PATH)
             .expect("Should have root dir")
             .into_os_string()
