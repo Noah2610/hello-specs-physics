@@ -13,9 +13,31 @@ Container(
         percent:        true,
     ),
     // TODO: UiImageBuilder
-    // background: (
-    //     image: File("resources/textures/bg_menu.png", Png, (channel: Srgb)),
-    // ),
+    background: Texture(
+        File(
+            "resources/textures/bg_menu.png",
+            ("IMAGE", (
+                    sampler_info: (
+                        min_filter:  Nearest,
+                        mag_filter:  Nearest,
+                        mip_filter:  Nearest,
+                        wrap_mode:   (Clamp, Clamp, Clamp),
+                        lod_bias:    (0),
+                        lod_range:   (start: (0), end: (0)),
+                        border:      (0),
+                        anisotropic: Off,
+                    ),
+            )),
+            // https://docs.rs/rendy-texture/0.4.0/src/rendy_texture/texture.rs.html#84-96
+            // ("IMAGE", (
+            //         // channel: Srgb,
+            //         // sampler: (
+            //         //     filter: Clamp,
+            //         //     wrap_mode: (Clamp, Clamp, Clamp),
+            //         // )
+            // )),
+        )
+    ),
     children: [
         // UiWidget::Button
         Button(
@@ -41,11 +63,11 @@ Container(
                     File(
                         "resources/textures/btn_primary.png",
                         ("IMAGE", (
-                                // channel: Srgb,
-                                // sampler: (
-                                //     filter: Scale,
-                                //     wrap_mode: (Clamp, Clamp, Clamp),
-                                // )
+                                channel: Srgb,
+                                sampler: (
+                                    filter: Scale,
+                                    wrap_mode: (Clamp, Clamp, Clamp),
+                                )
                         )),
                     ),
                 ),
