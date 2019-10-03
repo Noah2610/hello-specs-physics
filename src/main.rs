@@ -7,6 +7,8 @@ extern crate serde;
 mod input;
 mod states;
 
+use amethyst::config::Config;
+use amethyst::core::frame_limiter::FrameRateLimitConfig;
 use amethyst::core::transform::TransformBundle;
 use amethyst::renderer::types::DefaultBackend;
 use amethyst::renderer::{RenderFlat2D, RenderToWindow, RenderingBundle};
@@ -14,6 +16,18 @@ use amethyst::ui::{RenderUi, UiBundle};
 use amethyst::utils::application_root_dir;
 use amethyst::{ApplicationBuilder, LogLevelFilter, LoggerConfig};
 use deathframe::custom_game_data::prelude::*;
+
+pub fn resource<S>(path: S) -> String
+where
+    S: ToString,
+{
+    use amethyst::utils::app_root_dir::application_dir;
+    let res_dir =
+        application_dir("resources").expect("Should have resources directory");
+
+    let path = res_dir.join(path.to_string());
+    path.to_str().unwrap().to_string()
+}
 
 fn main() -> Result<(), String> {
     init_game().map_err(|e| e.to_string())
@@ -26,6 +40,9 @@ fn init_game() -> amethyst::Result<()> {
 
     let mut game: amethyst::CoreApplication<CustomGameData<()>> =
         ApplicationBuilder::new("./", states::Ingame::default())?
+            .with_frame_limit_config(FrameRateLimitConfig::load(resource(
+                "config/frame_limiter.ron",
+            )))
             .build(game_data)?;
     game.run();
 

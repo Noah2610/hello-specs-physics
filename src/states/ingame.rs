@@ -1,10 +1,10 @@
 use super::state_prelude::*;
+use crate::resource;
 
 use amethyst::assets::ProgressCounter;
-use amethyst::utils::app_root_dir::application_dir;
 use deathframe::menu::{Menu, UiData};
 
-const UI_RON_PATH: &str = "resources/ui/ingame.ron";
+const UI_RON_PATH: &str = "ui/ingame.ron";
 
 #[derive(Default)]
 pub struct Ingame {
@@ -14,9 +14,8 @@ pub struct Ingame {
 
 impl<'a, 'b> State<CustomGameData<'a, 'b, ()>, StateEvent> for Ingame {
     fn on_start(&mut self, mut data: StateData<CustomGameData>) {
-        let path = application_dir(UI_RON_PATH).expect("Should have ron file");
-        let ron_path = path.to_str().expect("Should have ron file");
-        self.ui_progress = Some(self.create_ui(&mut data, ron_path));
+        self.ui_progress =
+            Some(self.create_ui(&mut data, resource(UI_RON_PATH)));
     }
 
     fn update(
