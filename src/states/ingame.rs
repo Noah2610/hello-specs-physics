@@ -14,7 +14,9 @@ pub struct Ingame {
 
 impl<'a, 'b> State<CustomGameData<'a, 'b, ()>, StateEvent> for Ingame {
     fn on_start(&mut self, mut data: StateData<CustomGameData>) {
-        self.ui_progress = Some(self.create_ui(&mut data));
+        let path = application_dir(UI_RON_PATH).expect("Should have ron file");
+        let ron_path = path.to_str().expect("Should have ron file");
+        self.ui_progress = Some(self.create_ui(&mut data, ron_path));
     }
 
     fn update(
@@ -58,16 +60,6 @@ impl<'a, 'b> Menu<CustomGameData<'a, 'b, ()>, StateEvent> for Ingame {
             "btn_secondary" => Some(Trans::Pop),
             _ => None,
         }
-    }
-
-    fn ui_ron_path(&self) -> String {
-        // TODO stupid
-        application_dir(UI_RON_PATH)
-            .expect("Should have root dir")
-            .into_os_string()
-            .to_str()
-            .expect("Should have root dir")
-            .to_string()
     }
 
     fn ui_data(&self) -> &UiData {

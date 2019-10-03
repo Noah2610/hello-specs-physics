@@ -10,7 +10,7 @@ mod states;
 use amethyst::core::transform::TransformBundle;
 use amethyst::renderer::types::DefaultBackend;
 use amethyst::renderer::{RenderFlat2D, RenderToWindow, RenderingBundle};
-use amethyst::ui::{DrawUi, UiBundle};
+use amethyst::ui::{RenderUi, UiBundle};
 use amethyst::utils::application_root_dir;
 use amethyst::{ApplicationBuilder, LogLevelFilter, LoggerConfig};
 use deathframe::custom_game_data::prelude::*;
@@ -51,8 +51,8 @@ fn build_game_data<'a, 'b>(
             RenderToWindow::from_config_path(display_config_file)
                 .with_clear([0.0, 0.0, 0.0, 1.0]),
         )
-        .with_plugin(RenderFlat2D::default());
-    // .with_plugin(DrawUi::new());
+        .with_plugin(RenderFlat2D::default())
+        .with_plugin(RenderUi::default());
     let transform_bundle = TransformBundle::new();
     let input_bundle = input::input_bundle();
     let ui_bundle = UiBundle::<input::Bindings>::new();

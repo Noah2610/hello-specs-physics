@@ -33,101 +33,113 @@ Container(
             button: (
                 text:              "PRIMARY",
                 font:              File("resources/fonts/undefined-medium.ttf", ("TTF", ())),
-                font_size:         40.0,
+                font_size:         20.0,
                 normal_text_color: (0.0, 0.0, 0.0, 1.0),
                 hover_text_color:  (0.4, 0.4, 0.4, 1.0),
                 press_text_color:  (0.4, 0.4, 0.4, 1.0),
-                normal_image:      File(
-                    "resources/textures/btn_primary.png",
-                    Png,
-                    (
-                        channel: Srgb,
-                        sampler: (
-                            filter: Scale,
-                            wrap_mode: (Clamp, Clamp, Clamp),
-                        )
+                normal_image:      Texture(
+                    File(
+                        "resources/textures/btn_primary.png",
+                        ("IMAGE", (
+                                // channel: Srgb,
+                                // sampler: (
+                                //     filter: Scale,
+                                //     wrap_mode: (Clamp, Clamp, Clamp),
+                                // )
+                        )),
                     ),
                 ),
-                hover_image:       File(
-                    "resources/textures/btn_primary.png",
-                    Png,
-                    (
-                        channel: Srgb,
-                        sampler: (
-                            filter: Scale,
-                            wrap_mode: (Clamp, Clamp, Clamp),
-                        )
-                    ),
-                ),
-                press_image:       File(
-                    "resources/textures/btn_primary.png",
-                    Png,
-                    (
-                        channel: Srgb,
-                        sampler: (
-                            filter: Scale,
-                            wrap_mode: (Clamp, Clamp, Clamp),
-                        )
-                    ),
-                ),
+                // normal_image:      File(
+                //     "resources/textures/btn_primary.png",
+                //     Png,
+                //     (
+                //         channel: Srgb,
+                //         sampler: (
+                //             filter: Scale,
+                //             wrap_mode: (Clamp, Clamp, Clamp),
+                //         )
+                //     ),
+                // ),
+                // hover_image:       File(
+                //     "resources/textures/btn_primary.png",
+                //     Png,
+                //     (
+                //         channel: Srgb,
+                //         sampler: (
+                //             filter: Scale,
+                //             wrap_mode: (Clamp, Clamp, Clamp),
+                //         )
+                //     ),
+                // ),
+                // press_image:       File(
+                //     "resources/textures/btn_primary.png",
+                //     Png,
+                //     (
+                //         channel: Srgb,
+                //         sampler: (
+                //             filter: Scale,
+                //             wrap_mode: (Clamp, Clamp, Clamp),
+                //         )
+                //     ),
+                // ),
             ),
         ),
         // UiWidget::Button
-        Button(
-            // UiTransformBuilder
-            transform: (
-                id:             "btn_secondary",
-                x:              0.0,
-                y:              -96.0,
-                width:          224.0,
-                height:         112.0,
-                anchor:         Middle,
-                mouse_reactive: true,
-            ),
-            // UiButtonBuilder
-            button: (
-                text:              "SECONDARY",
-                font:              File("resources/fonts/undefined-medium.ttf", Ttf, ()),
-                font_size:         40.0,
-                normal_text_color: (0.0, 0.0, 0.0, 1.0),
-                hover_text_color:  (0.4, 0.4, 0.4, 1.0),
-                press_text_color:  (0.4, 0.4, 0.4, 1.0),
-                // hover_text_color:  (0.4980392156862745, 0.0, 0.00784313725490196, 1.0),
-                // press_text_color:  (0.4980392156862745, 0.0, 0.00784313725490196, 1.0),
-                normal_image:      File(
-                    "resources/textures/btn_primary.png",
-                    Png,
-                    (
-                        channel: Srgb,
-                        sampler: (
-                            filter: Scale,
-                            wrap_mode: (Clamp, Clamp, Clamp),
-                        )
-                    ),
-                ),
-                hover_image:       File(
-                    "resources/textures/btn_primary.png",
-                    Png,
-                    (
-                        channel: Srgb,
-                        sampler: (
-                            filter: Scale,
-                            wrap_mode: (Clamp, Clamp, Clamp),
-                        )
-                    ),
-                ),
-                press_image:       File(
-                    "resources/textures/btn_primary.png",
-                    Png,
-                    (
-                        channel: Srgb,
-                        sampler: (
-                            filter: Scale,
-                            wrap_mode: (Clamp, Clamp, Clamp),
-                        )
-                    ),
-                ),
-            ),
-        )
+        // Button(
+        //     // UiTransformBuilder
+        //     transform: (
+        //         id:             "btn_secondary",
+        //         x:              0.0,
+        //         y:              -96.0,
+        //         width:          224.0,
+        //         height:         112.0,
+        //         anchor:         Middle,
+        //         mouse_reactive: true,
+        //     ),
+        //     // UiButtonBuilder
+        //     button: (
+        //         text:              "SECONDARY",
+        //         font:              File("resources/fonts/undefined-medium.ttf", Ttf, ()),
+        //         font_size:         40.0,
+        //         normal_text_color: (0.0, 0.0, 0.0, 1.0),
+        //         hover_text_color:  (0.4, 0.4, 0.4, 1.0),
+        //         press_text_color:  (0.4, 0.4, 0.4, 1.0),
+        //         // hover_text_color:  (0.4980392156862745, 0.0, 0.00784313725490196, 1.0),
+        //         // press_text_color:  (0.4980392156862745, 0.0, 0.00784313725490196, 1.0),
+        //         normal_image:      File(
+        //             "resources/textures/btn_primary.png",
+        //             Png,
+        //             (
+        //                 channel: Srgb,
+        //                 sampler: (
+        //                     filter: Scale,
+        //                     wrap_mode: (Clamp, Clamp, Clamp),
+        //                 )
+        //             ),
+        //         ),
+        //         hover_image:       File(
+        //             "resources/textures/btn_primary.png",
+        //             Png,
+        //             (
+        //                 channel: Srgb,
+        //                 sampler: (
+        //                     filter: Scale,
+        //                     wrap_mode: (Clamp, Clamp, Clamp),
+        //                 )
+        //             ),
+        //         ),
+        //         press_image:       File(
+        //             "resources/textures/btn_primary.png",
+        //             Png,
+        //             (
+        //                 channel: Srgb,
+        //                 sampler: (
+        //                     filter: Scale,
+        //                     wrap_mode: (Clamp, Clamp, Clamp),
+        //                 )
+        //             ),
+        //         ),
+        //     ),
+        // )
     ],
 )
