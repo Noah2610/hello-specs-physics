@@ -5,8 +5,10 @@ extern crate specs_physics;
 extern crate serde;
 
 mod input;
+mod music;
 mod states;
 
+use amethyst::audio::{AudioBundle, DjSystemDesc};
 use amethyst::config::Config;
 use amethyst::core::frame_limiter::FrameRateLimitConfig;
 use amethyst::core::transform::TransformBundle;
@@ -58,6 +60,8 @@ fn start_logger() {
 
 fn build_game_data<'a, 'b>(
 ) -> amethyst::Result<CustomGameDataBuilder<'a, 'b, ()>> {
+    use music::Music;
+
     let display_config_file = application_root_dir()
         .expect("Couldn't get game's root directory")
         .join("resources/config/display.ron");
@@ -73,13 +77,20 @@ fn build_game_data<'a, 'b>(
     let transform_bundle = TransformBundle::new();
     let input_bundle = input::input_bundle();
     let ui_bundle = UiBundle::<input::Bindings>::new();
+    let audio_bundle = AudioBundle::default();
 
     let custom_game_data = CustomGameDataBuilder::<'a, 'b, ()>::default()
         .dispatcher("ingame")?
         .with_core_bundle(rendering_bundle)?
         .with_core_bundle(transform_bundle)?
         .with_core_bundle(input_bundle)?
-        .with_core_bundle(ui_bundle)?;
+        .with_core_bundle(ui_bundle)?
+        .with_core_bundle(audio_bundle)?
+        .with_core_desc(
+            DjSystemDesc::new(|music: &mut Music| music.music.next()),
+            "dj_system",
+            &[],
+        )?;
 
     Ok(custom_game_data)
 }

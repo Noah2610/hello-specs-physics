@@ -14,6 +14,8 @@ pub struct Ingame {
 
 impl<'a, 'b> State<CustomGameData<'a, 'b, ()>, StateEvent> for Ingame {
     fn on_start(&mut self, mut data: StateData<CustomGameData>) {
+        crate::music::initialize_music(data.world);
+
         self.ui_progress =
             Some(self.create_ui(&mut data, resource(UI_RON_PATH)));
     }
