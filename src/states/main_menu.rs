@@ -26,7 +26,9 @@ impl<'a, 'b> State<CustomGameData<'a, 'b, ()>, StateEvent> for MainMenu {
         self.ui_progress =
             Some(self.create_ui(&mut data, resource(UI_RON_PATH)));
 
-        // TextureHandles
+        // SpriteSheetHandles and TextureHandles
+        data.world
+            .insert(deathframe::handles::SpriteSheetHandles::default());
         data.world
             .insert(deathframe::handles::TextureHandles::default());
     }

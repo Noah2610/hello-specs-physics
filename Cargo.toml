@@ -5,7 +5,7 @@ authors = ["Noah Rosenzweig <rosenzweig.noah@gmail.com>"]
 edition = "2018"
 
 [dependencies]
-amethyst      = { version = "0.13.0", features = ["vulkan"] }
+amethyst      = { version = "0.13.1", features = ["vulkan"] }
 deathframe    = { path = "../deathframe", version = "0.3.1" }
 serde         = { version = "1.0.101", features = ["derive"] }
 specs-physics = "0.3.0"

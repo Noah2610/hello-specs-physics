@@ -1,12 +1,11 @@
 use super::state_prelude::*;
 use crate::resource;
-use crate::CAMERA_SIZE;
 
 use amethyst::ecs::{Builder, World, WorldExt};
 use amethyst::renderer::Camera as AmethystCamera;
-use deathframe::handles::TextureHandles;
 
-const PLAYER_Z: f32 = 1.0;
+const CAMERA_SIZE: (f32, f32) = (100.0, 100.0);
+const PLAYER_DECR_VEL: (f32, f32) = (1000.0, 1000.0);
 
 #[derive(Default)]
 pub struct Ingame {}
@@ -16,7 +15,7 @@ impl<'a, 'b> State<CustomGameData<'a, 'b, ()>, StateEvent> for Ingame {
         data.world.delete_all();
 
         initialize_player(&mut data.world);
-        // Initialize before player
+        // Initialize player before camera
         initialize_camera(&mut data.world);
     }
 
@@ -33,6 +32,7 @@ impl<'a, 'b> State<CustomGameData<'a, 'b, ()>, StateEvent> for Ingame {
 fn initialize_camera(world: &mut World) {
     use amethyst::ecs::world::Index;
     use amethyst::ecs::{Entities, Join, ReadStorage};
+    use amethyst::renderer::camera::Projection;
     use deathframe::geo::Vector;
 
     let player_data: Option<(Index, Vector)> = world.exec(
@@ -50,29 +50,57 @@ fn initialize_camera(world: &mut World) {
 
     if let Some((player_id, player_pos)) = player_data {
         let mut transform = Transform::default();
-        transform.set_translation_xyz(player_pos.0, player_pos.1, PLAYER_Z);
+        transform.set_translation_xyz(
+            CAMERA_SIZE.0 * 0.5,
+            CAMERA_SIZE.1 * 0.5,
+            10.0,
+        );
 
         world
             .create_entity()
             .with(transform)
             .with(AmethystCamera::standard_2d(CAMERA_SIZE.0, CAMERA_SIZE.1))
-            .with(Camera::new().follow(player_id).build())
+            // .with(AmethystCamera::from(Projection::orthographic(
+            //     -CAMERA_SIZE.0 * 0.5, // Left
+            //     CAMERA_SIZE.0 * 0.5,  // Right
+            //     -CAMERA_SIZE.1 * 0.5, // Bottom (!)
+            //     CAMERA_SIZE.1 * 0.5,  // Top    (!)
+            //     0.0,
+            //     10.0,
+            // )))
+            // .with(Camera::new().follow(player_id).build())
             .build();
     }
 }
 
 fn initialize_player(world: &mut World) {
+    use amethyst::renderer::SpriteRender;
+    use deathframe::handles::{SpriteSheetHandles, TextureHandles};
+
+    let mut transform = Transform::default();
+    transform.set_translation_xyz(10.0, 50.0, 0.0);
+
+    let sprite_sheet_handle = world
+        .write_resource::<SpriteSheetHandles>()
+        .get_or_load(resource("spritesheets/player.png"), world);
+    let sprite_render = SpriteRender {
+        sprite_sheet:  sprite_sheet_handle,
+        sprite_number: 0,
+    };
+
     let texture_handle = world
         .write_resource::<TextureHandles>()
-        .get_or_load(resource("textures/player.png"), world);
+        .get_or_load(resource("spritesheets/player.png"), world);
 
     world
         .create_entity()
         .with(Player::default())
-        .with(Transform::default())
+        .with(transform)
         .with(Velocity::default())
+        .with(DecreaseVelocity::new(PLAYER_DECR_VEL.0, PLAYER_DECR_VEL.1))
         .with(Size::new(32.0, 64.0))
         .with(ScaleOnce)
-        .with(texture_handle)
+        .with(sprite_render)
+        // .with(texture_handle)
         .build();
 }

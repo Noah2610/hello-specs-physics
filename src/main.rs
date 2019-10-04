@@ -22,8 +22,6 @@ use amethyst::utils::application_root_dir;
 use amethyst::{ApplicationBuilder, LogLevelFilter, LoggerConfig};
 use deathframe::custom_game_data::prelude::*;
 
-pub const CAMERA_SIZE: (f32, f32) = (1280.0, 720.0);
-
 pub fn resource<S>(path: S) -> String
 where
     S: ToString,
@@ -77,7 +75,7 @@ fn build_game_data<'a, 'b>(
     let rendering_bundle = RenderingBundle::<DefaultBackend>::new()
         .with_plugin(
             RenderToWindow::from_config_path(display_config_file)
-                .with_clear([0.0, 0.0, 0.0, 1.0]),
+                .with_clear([0.0, 0.0, 0.0, 0.0]),
         )
         .with_plugin(RenderFlat2D::default())
         .with_plugin(RenderUi::default());
@@ -113,7 +111,13 @@ fn build_game_data<'a, 'b>(
             "move_entities",
             &[],
         )?
-        .with("ingame", CameraSystem::default(), "camera", &[])?
+        .with(
+            "ingame",
+            DecreaseVelocitiesSystem::default(),
+            "decrease_velocities",
+            &["move_entities"],
+        )?
+        // .with("ingame", CameraSystem::default(), "camera", &[])?
         .with("ingame", MovePlayer::default(), "move_player", &[])?;
 
     Ok(custom_game_data)
