@@ -6,12 +6,32 @@ pub mod prelude {
 
 use amethyst::input::{BindingTypes, InputBundle};
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq, Eq, Hash, Default)]
 pub struct Bindings;
-#[derive(Debug, Clone, Hash, PartialEq, Eq, Serialize, Deserialize)]
-pub enum AxisBinding {}
-#[derive(Debug, Clone, Hash, PartialEq, Eq, Serialize, Deserialize)]
-pub enum ActionBinding {}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub enum AxisBinding {
+    None,
+    PlayerX,
+    PlayerY,
+}
+
+impl Default for AxisBinding {
+    fn default() -> Self {
+        AxisBinding::None
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub enum ActionBinding {
+    None,
+}
+
+impl Default for ActionBinding {
+    fn default() -> Self {
+        ActionBinding::None
+    }
+}
 
 impl BindingTypes for Bindings {
     type Axis = AxisBinding;

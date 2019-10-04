@@ -4,9 +4,12 @@ extern crate specs_physics;
 #[macro_use]
 extern crate serde;
 
+mod components;
 mod input;
 mod music;
+mod solid_tag;
 mod states;
+mod systems;
 
 use amethyst::audio::{AudioBundle, DjSystemDesc};
 use amethyst::config::Config;
@@ -41,7 +44,7 @@ fn init_game() -> amethyst::Result<()> {
     let game_data = build_game_data()?;
 
     let mut game: amethyst::CoreApplication<CustomGameData<()>> =
-        ApplicationBuilder::new("./", states::Ingame::default())?
+        ApplicationBuilder::new("./", states::MainMenu::default())?
             .with_frame_limit_config(FrameRateLimitConfig::load(resource(
                 "config/frame_limiter.ron",
             )))
@@ -60,7 +63,9 @@ fn start_logger() {
 
 fn build_game_data<'a, 'b>(
 ) -> amethyst::Result<CustomGameDataBuilder<'a, 'b, ()>> {
+    use deathframe::systems::InputManagerSystem;
     use music::Music;
+    use systems::prelude::*;
 
     let display_config_file = application_root_dir()
         .expect("Couldn't get game's root directory")
@@ -75,11 +80,14 @@ fn build_game_data<'a, 'b>(
         .with_plugin(RenderFlat2D::default())
         .with_plugin(RenderUi::default());
     let transform_bundle = TransformBundle::new();
-    let input_bundle = input::input_bundle();
+    let input_bundle = input::input_bundle()
+        .with_bindings_from_file(resource("config/bindings.ron"))
+        .unwrap();
     let ui_bundle = UiBundle::<input::Bindings>::new();
     let audio_bundle = AudioBundle::default();
 
     let custom_game_data = CustomGameDataBuilder::<'a, 'b, ()>::default()
+        .dispatcher("main_menu")?
         .dispatcher("ingame")?
         .with_core_bundle(rendering_bundle)?
         .with_core_bundle(transform_bundle)?
@@ -90,7 +98,19 @@ fn build_game_data<'a, 'b>(
             DjSystemDesc::new(|music: &mut Music| music.music.next()),
             "dj_system",
             &[],
-        )?;
+        )?
+        .with_core(
+            InputManagerSystem::<input::Bindings>::default(),
+            "input_manager",
+            &[],
+        )?
+        .with(
+            "ingame",
+            MoveEntitiesSystem::<solid_tag::SolidTag>::default(),
+            "move_entities",
+            &[],
+        )?
+        .with("ingame", MovePlayer::default(), "move_player", &[])?;
 
     Ok(custom_game_data)
 }
