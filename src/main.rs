@@ -22,6 +22,8 @@ use amethyst::utils::application_root_dir;
 use amethyst::{ApplicationBuilder, LogLevelFilter, LoggerConfig};
 use deathframe::custom_game_data::prelude::*;
 
+pub const CAMERA_SIZE: (f32, f32) = (1280.0, 720.0);
+
 pub fn resource<S>(path: S) -> String
 where
     S: ToString,
@@ -99,6 +101,7 @@ fn build_game_data<'a, 'b>(
             "dj_system",
             &[],
         )?
+        .with_core(ScaleSpritesSystem, "scale_sprites", &[])?
         .with_core(
             InputManagerSystem::<input::Bindings>::default(),
             "input_manager",
@@ -110,6 +113,7 @@ fn build_game_data<'a, 'b>(
             "move_entities",
             &[],
         )?
+        .with("ingame", CameraSystem::default(), "camera", &[])?
         .with("ingame", MovePlayer::default(), "move_player", &[])?;
 
     Ok(custom_game_data)
