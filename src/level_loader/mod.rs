@@ -2,17 +2,15 @@ mod build_camera;
 mod build_player;
 mod build_tiles;
 
+use crate::sprite_sheet_handles::SpriteSheetHandles;
 use amethyst::ecs::world::Index;
 use amethyst::ecs::{Builder, World, WorldExt};
 use amethyst::ecs::{Entities, Join, ReadStorage};
 use amethyst::renderer::{Camera, SpriteRender};
-use deathframe::geo::prelude::*;
-use deathframe::handles::SpriteSheetHandles;
 use json::JsonValue;
 
 use crate::components::prelude::*;
 use crate::helpers::*;
-use crate::solid_tag::SolidTag;
 
 const TILE_SIZE: (f32, f32) = (16.0, 16.0);
 const LEVELS_DIR: &str = "levels";
@@ -84,7 +82,7 @@ impl LevelLoader {
         for (key, val) in json.entries() {
             match key {
                 "size" => {
-                    self.level_size = Some(Vector::new(
+                    self.level_size = Some((
                         val["w"].as_f32().expect(ERRMSG),
                         val["h"].as_f32().expect(ERRMSG),
                     ))
@@ -113,8 +111,8 @@ impl LevelLoader {
                 ),
                 &object_data["properties"],
             ) {
-                let size = Vector::new(w, h);
-                let pos = Vector::new(x + size.0 * 0.5, y - size.1 * 0.5);
+                let size = (w, h);
+                let pos = (x + size.0 * 0.5, y - size.1 * 0.5);
 
                 match obj_type {
                     "Player" => {
@@ -149,8 +147,8 @@ impl LevelLoader {
             ) {
                 let spritesheet_path =
                     resource(format!("spritesheets/{}.png", tileset_name));
-                let size = Vector::from(TILE_SIZE);
-                let pos = Vector::new(x + size.0 * 0.5, y - size.1 * 0.5);
+                let size = TILE_SIZE;
+                let pos = (x + size.0 * 0.5, y - size.1 * 0.5);
 
                 self.tiles_data.push(EntityData {
                     pos,

@@ -1,15 +1,18 @@
 extern crate amethyst;
-extern crate deathframe;
+extern crate regex;
 extern crate specs_physics;
 #[macro_use]
 extern crate serde;
 
 mod components;
+mod custom_game_data;
 mod helpers;
 mod input;
+mod input_manager;
 mod level_loader;
+mod menu;
 mod music;
-mod solid_tag;
+mod sprite_sheet_handles;
 mod states;
 mod systems;
 
@@ -22,8 +25,8 @@ use amethyst::renderer::{RenderFlat2D, RenderToWindow, RenderingBundle};
 use amethyst::ui::{RenderUi, UiBundle};
 use amethyst::utils::application_root_dir;
 use amethyst::{ApplicationBuilder, LogLevelFilter, LoggerConfig};
-use deathframe::custom_game_data::prelude::*;
 
+use custom_game_data::prelude::*;
 use helpers::*;
 
 fn main() -> Result<(), String> {
@@ -55,7 +58,6 @@ fn start_logger() {
 
 fn build_game_data<'a, 'b>(
 ) -> amethyst::Result<CustomGameDataBuilder<'a, 'b, ()>> {
-    use deathframe::systems::InputManagerSystem;
     use music::Music;
     use systems::prelude::*;
 
@@ -99,17 +101,10 @@ fn build_game_data<'a, 'b>(
         )?
         .with(
             "ingame",
-            MoveEntitiesSystem::<solid_tag::SolidTag>::default(),
-            "move_entities",
-            &[],
-        )?
-        .with("ingame", CollisionSystem::default(), "collision_system", &[
-        ])?
-        .with(
-            "ingame",
             DecreaseVelocitiesSystem::default(),
             "decrease_velocities",
-            &["move_entities"],
+            &[],
+            // &["move_entities"], // TODO
         )?
         // .with("ingame", CameraSystem::default(), "camera", &[])?
         .with("ingame", MovePlayer::default(), "move_player", &[])?;

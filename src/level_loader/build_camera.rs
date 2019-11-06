@@ -12,7 +12,12 @@ impl LevelLoader {
                 ReadStorage<Transform>,
             )| {
                 (&entities, &players, &transforms).join().next().map(
-                    |(entity, _, transform)| (entity.id(), transform.into()),
+                    |(entity, _, transform)| {
+                        (entity.id(), {
+                            let pos = transform.translation();
+                            (pos.x, pos.y)
+                        })
+                    },
                 )
             },
         );

@@ -6,8 +6,8 @@ edition = "2018"
 
 [dependencies]
 amethyst      = { version = "0.13.2", features = ["vulkan"] }
-deathframe    = "0.5.0"
 json          = "0.12.0"
+regex         = "1.3.1"
 ron           = "0.5.1"
 serde         = { version = "1.0.101", features = ["derive"] }
 specs-physics = "0.3.0"

@@ -1,3 +1,5 @@
+pub type Vector = (f32, f32);
+
 pub fn resource<S>(path: S) -> String
 where
     S: ToString,

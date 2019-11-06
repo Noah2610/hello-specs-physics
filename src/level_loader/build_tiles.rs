@@ -33,7 +33,7 @@ impl LevelLoader {
             let mut entity = world
                 .create_entity()
                 .with(transform)
-                .with(Size::from(*size))
+                .with(Size::new(size.0, size.1))
                 .with(ScaleOnce::default())
                 .with(Transparent);
 
@@ -42,9 +42,7 @@ impl LevelLoader {
             }
 
             if is_solid(&properties) {
-                entity = entity
-                    .with(Solid::new(SolidTag::Tile))
-                    .with(Collision::default());
+                // TODO
             }
 
             entity.build();

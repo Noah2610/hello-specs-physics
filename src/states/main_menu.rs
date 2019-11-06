@@ -1,6 +1,4 @@
 use amethyst::assets::ProgressCounter;
-use deathframe::input_manager::InputManager;
-use deathframe::menu::{Menu, UiData};
 
 use super::state_prelude::*;
 use crate::helpers::*;
@@ -15,6 +13,8 @@ pub struct MainMenu {
 
 impl<'a, 'b> State<CustomGameData<'a, 'b, ()>, StateEvent> for MainMenu {
     fn on_start(&mut self, mut data: StateData<CustomGameData>) {
+        use crate::sprite_sheet_handles::SpriteSheetHandles;
+
         // InputManager
         data.world
             .insert(InputManager::<crate::input::Bindings>::default());
@@ -26,11 +26,8 @@ impl<'a, 'b> State<CustomGameData<'a, 'b, ()>, StateEvent> for MainMenu {
         self.ui_progress =
             Some(self.create_ui(&mut data, resource(UI_RON_PATH)));
 
-        // SpriteSheetHandles and TextureHandles
-        data.world
-            .insert(deathframe::handles::SpriteSheetHandles::default());
-        data.world
-            .insert(deathframe::handles::TextureHandles::default());
+        // SpriteSheetHandles
+        data.world.insert(SpriteSheetHandles::default());
     }
 
     fn update(

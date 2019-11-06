@@ -41,7 +41,6 @@ impl LevelLoader {
                 .with(size)
                 .with(ScaleOnce)
                 .with(sprite_render)
-                .with(Solid::new(SolidTag::Player))
                 .build();
         }
     }

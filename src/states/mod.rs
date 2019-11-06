@@ -8,10 +8,11 @@ pub mod state_prelude {
     pub use amethyst::ui::{UiEvent, UiEventType};
     pub use amethyst::{State, StateData, StateEvent, Trans};
 
-    pub use deathframe::custom_game_data::CustomGameData;
-
     pub use super::prelude::*;
     pub use crate::components::prelude::*;
+    pub use crate::custom_game_data::CustomGameData;
+    pub use crate::input_manager::InputManager;
+    pub use crate::menu::prelude::*;
 }
 
 mod ingame;
