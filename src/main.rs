@@ -103,6 +103,8 @@ fn build_game_data<'a, 'b>(
             "move_entities",
             &[],
         )?
+        .with("ingame", CollisionSystem::default(), "collision_system", &[
+        ])?
         .with(
             "ingame",
             DecreaseVelocitiesSystem::default(),

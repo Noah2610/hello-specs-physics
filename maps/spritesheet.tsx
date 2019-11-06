@@ -36,11 +36,6 @@
    <property name="solid" type="bool" value="true"/>
   </properties>
  </tile>
- <tile id="9">
-  <properties>
-   <property name="solid" type="bool" value="true"/>
-  </properties>
- </tile>
  <tile id="13">
   <properties>
    <property name="solid" type="bool" value="true"/>
@@ -354,51 +349,6 @@
  <tile id="170">
   <properties>
    <property name="solid" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="214">
-  <properties>
-   <property name="spike" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="216">
-  <properties>
-   <property name="spike" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="218">
-  <properties>
-   <property name="spike" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="219">
-  <properties>
-   <property name="spike" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="220">
-  <properties>
-   <property name="spike" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="241">
-  <properties>
-   <property name="spike" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="242">
-  <properties>
-   <property name="spike" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="245">
-  <properties>
-   <property name="spike" type="bool" value="true"/>
-  </properties>
- </tile>
- <tile id="255">
-  <properties>
-   <property name="spike" type="bool" value="true"/>
   </properties>
  </tile>
 </tileset>
