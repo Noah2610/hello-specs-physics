@@ -4,7 +4,7 @@ use crate::resource;
 use amethyst::ecs::{Builder, World, WorldExt};
 use amethyst::renderer::Camera as AmethystCamera;
 
-const CAMERA_SIZE: (f32, f32) = (100.0, 100.0);
+const CAMERA_SIZE: (f32, f32) = (400.0, 400.0);
 const PLAYER_DECR_VEL: (f32, f32) = (1000.0, 1000.0);
 
 #[derive(Default)]

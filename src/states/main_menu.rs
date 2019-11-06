@@ -66,14 +66,16 @@ impl<'a, 'b> Menu<CustomGameData<'a, 'b, ()>, StateEvent> for MainMenu {
         &mut self,
         _data: &mut StateData<CustomGameData<'a, 'b, ()>>,
         event_name: String,
-        _event: UiEvent,
+        event: UiEvent,
     ) -> Option<Trans<CustomGameData<'a, 'b, ()>, StateEvent>> {
-        dbg!(&event_name);
-
-        match event_name.as_ref() {
-            "btn_primary" => Some(Trans::Push(Box::new(Ingame::default()))),
-            "btn_secondary" => Some(Trans::Quit),
-            _ => None,
+        if let UiEventType::ClickStart = event.event_type {
+            match event_name.as_ref() {
+                "btn_primary" => Some(Trans::Push(Box::new(Ingame::default()))),
+                "btn_secondary" => Some(Trans::Quit),
+                _ => None,
+            }
+        } else {
+            None
         }
     }
 

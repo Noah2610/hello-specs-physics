@@ -4,7 +4,7 @@ pub mod prelude {
 }
 
 pub mod state_prelude {
-    pub use amethyst::ui::UiEvent;
+    pub use amethyst::ui::{UiEvent, UiEventType};
     pub use amethyst::{State, StateData, StateEvent, Trans};
 
     pub use deathframe::custom_game_data::CustomGameData;
