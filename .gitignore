@@ -2,3 +2,5 @@
 **/*.rs.bk
 
 /bin/util.sh
+
+/resources/levels/*.ron
