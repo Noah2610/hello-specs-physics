@@ -66,6 +66,7 @@ impl<'a, 'b> Menu<CustomGameData<'a, 'b, ()>, StateEvent> for MainMenu {
         &mut self,
         _data: &mut StateData<CustomGameData<'a, 'b, ()>>,
         event_name: String,
+        _event: UiEvent,
     ) -> Option<Trans<CustomGameData<'a, 'b, ()>, StateEvent>> {
         dbg!(&event_name);
 

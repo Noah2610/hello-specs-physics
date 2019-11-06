@@ -10,21 +10,17 @@ impl<'a> System<'a> for MovePlayer {
     type SystemData = (
         Read<'a, Time>,
         Read<'a, InputManager<Bindings>>,
-        ReadStorage<'a, Transform>,
-        WriteStorage<'a, Player>,
+        ReadStorage<'a, Player>,
         WriteStorage<'a, Velocity>,
     );
 
     fn run(
         &mut self,
-        (time, input_manager, transforms, mut players, mut velocities): Self::SystemData,
+        (time, input_manager, players, mut velocities): Self::SystemData,
     ) {
-        if let Some((player, player_velocity, player_transform)) =
-            (&mut players, &mut velocities, &transforms).join().next()
+        if let Some((_, player_velocity)) =
+            (&players, &mut velocities).join().next()
         {
-            // let player_pos = Vector::from(player_transform);
-            // dbg!("PLAYER POS {}", player_pos);
-
             let dt = time.delta_seconds();
             // Player movement
             if let Some(x) = input_manager.axis_value(AxisBinding::PlayerX) {

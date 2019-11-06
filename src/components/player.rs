@@ -1,7 +1,7 @@
 use super::component_prelude::*;
 
 #[derive(Default)]
-pub struct Player {}
+pub struct Player;
 
 impl Component for Player {
     type Storage = HashMapStorage<Self>;

@@ -32,7 +32,6 @@ impl<'a, 'b> State<CustomGameData<'a, 'b, ()>, StateEvent> for Ingame {
 fn initialize_camera(world: &mut World) {
     use amethyst::ecs::world::Index;
     use amethyst::ecs::{Entities, Join, ReadStorage};
-    use amethyst::renderer::camera::Projection;
     use deathframe::geo::Vector;
 
     let player_data: Option<(Index, Vector)> = world.exec(
@@ -48,7 +47,7 @@ fn initialize_camera(world: &mut World) {
         },
     );
 
-    if let Some((player_id, player_pos)) = player_data {
+    if let Some((_player_id, _player_pos)) = player_data {
         let mut transform = Transform::default();
         transform.set_translation_xyz(
             CAMERA_SIZE.0 * 0.5,
@@ -75,7 +74,7 @@ fn initialize_camera(world: &mut World) {
 
 fn initialize_player(world: &mut World) {
     use amethyst::renderer::SpriteRender;
-    use deathframe::handles::{SpriteSheetHandles, TextureHandles};
+    use deathframe::handles::SpriteSheetHandles;
 
     let mut transform = Transform::default();
     transform.set_translation_xyz(10.0, 50.0, 0.0);
@@ -88,10 +87,6 @@ fn initialize_player(world: &mut World) {
         sprite_number: 0,
     };
 
-    let texture_handle = world
-        .write_resource::<TextureHandles>()
-        .get_or_load(resource("spritesheets/player.png"), world);
-
     world
         .create_entity()
         .with(Player::default())
@@ -101,6 +96,5 @@ fn initialize_player(world: &mut World) {
         .with(Size::new(32.0, 64.0))
         .with(ScaleOnce)
         .with(sprite_render)
-        // .with(texture_handle)
         .build();
 }
