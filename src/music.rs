@@ -5,7 +5,7 @@ use amethyst::assets::Loader;
 use amethyst::audio::{AudioSink, OggFormat, SourceHandle};
 use amethyst::ecs::{World, WorldExt};
 
-use crate::resource;
+use crate::helpers::*;
 
 const MUSIC: &[&str] = &["audio/song.ogg"];
 

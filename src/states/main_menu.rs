@@ -1,9 +1,9 @@
-use super::state_prelude::*;
-use crate::resource;
-
 use amethyst::assets::ProgressCounter;
 use deathframe::input_manager::InputManager;
 use deathframe::menu::{Menu, UiData};
+
+use super::state_prelude::*;
+use crate::helpers::*;
 
 const UI_RON_PATH: &str = "ui/menu.ron";
 

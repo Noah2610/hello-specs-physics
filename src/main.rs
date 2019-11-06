@@ -5,7 +5,9 @@ extern crate specs_physics;
 extern crate serde;
 
 mod components;
+mod helpers;
 mod input;
+mod level_loader;
 mod music;
 mod solid_tag;
 mod states;
@@ -22,17 +24,7 @@ use amethyst::utils::application_root_dir;
 use amethyst::{ApplicationBuilder, LogLevelFilter, LoggerConfig};
 use deathframe::custom_game_data::prelude::*;
 
-pub fn resource<S>(path: S) -> String
-where
-    S: ToString,
-{
-    use amethyst::utils::app_root_dir::application_dir;
-    let res_dir =
-        application_dir("resources").expect("Should have resources directory");
-
-    let path = res_dir.join(path.to_string());
-    path.to_str().unwrap().to_string()
-}
+use helpers::*;
 
 fn main() -> Result<(), String> {
     init_game().map_err(|e| e.to_string())
